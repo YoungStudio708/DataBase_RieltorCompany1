@@ -1,0 +1,14 @@
+create table UserHuman
+(
+	ID_User SERIAL not null constraint PK_User primary key,
+	UserName varchar (90) not null,
+	Salary int  not null
+);
+
+insert into UserHuman (userName, salary)
+values ('Джугашвили Иосиф Иссарионович', '10000'),
+('Гитлер Адольф', '20000'),
+('Ульянов Владимир Ильич', '300000');
+select * from UserHuman;
+
+delete from UserHuman
