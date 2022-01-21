@@ -9,7 +9,7 @@ create table nedvijimost -- таблица для недвижимости
 ( -- начало
 	--creating primary key for nedvijimost table
 	id_nedvijimost serial not null constraint pk_nedvijimost primary key,
-	address varchar(50) not null constraint ui_address unique, -- создание строки для уникалььного адреса.
+	addresss varchar(50) not null constraint ui_address unique, -- создание строки для уникалььного адреса.
 	opisanie varchar(150) not null, -- создание строки для описания
 	data_postrojki date not null, -- создание строки для указания даты постройки ссоружения
 	kollichestvo_komnat int not null check (kollichestvo_komnat > 0),--строка для указания количества комнат в выбранном жилом помещении с проверко, 
@@ -119,9 +119,5 @@ create table sotrudnik_otdel -- таблица для работников от�
 	otdel_id int not null references "otdel"("id_otdel") -- внешний ключ на отделы
 );
 
-/*
------------------------------
-Заполнение таблиц данными
------------------------------
-*/
+
 
