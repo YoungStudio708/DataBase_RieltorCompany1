@@ -105,18 +105,18 @@ create table position_s -- таблица для должностей
 	type_uslug_id int not null references "type_uslug"("id_type_uslug") -- внешний ключ на таблицу с типами услуг
 );
 
-create table sotrudnik_position
+create table sotrudnik_position -- таблица для общей таблицы сотрудника и должности
 (
-	id_sotrudnik_position serial not null constraint pk_sotrudnik_position primary key,
-	sotrudnik_id int not null references "sotrudnik"("id_sotrudnik"),
-	position_id int not null references "position_s"("id_position")
+	id_sotrudnik_position serial not null constraint pk_sotrudnik_position primary key, -- первичный ключ
+	sotrudnik_id int not null references "sotrudnik"("id_sotrudnik"), -- внешний ключ на сотрудника
+	position_id int not null references "position_s"("id_position") -- внешний ключ на должности
 );
 
-create table sotrudnik_otdel
+create table sotrudnik_otdel -- таблица для работников отдела
 (
-	id_sotrudnik_otdel serial not null constraint pk_sotrudnik_otdel primary key,
-	sotrudnik_id int not null references "sotrudnik"("id_sotrudnik"),
-	otdel_id int not null references "otdel"("id_otdel")
+	id_sotrudnik_otdel serial not null constraint pk_sotrudnik_otdel primary key, -- первичный ключ
+	sotrudnik_id int not null references "sotrudnik"("id_sotrudnik"), -- внешний ключ на сотрудника
+	otdel_id int not null references "otdel"("id_otdel") -- внешний ключ на отделы
 );
 
 /*
