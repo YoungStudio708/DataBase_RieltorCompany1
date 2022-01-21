@@ -15,13 +15,13 @@
                 "authProtocol": "default"
             },
             "previewLimit": 50,
-            "server": "localhost",
+            "server": "127.0.0.1",
             "port": 3306,
-            "askForPassword": true,
             "driver": "MySQL",
-            "name": "Podd",
-            "database": "rieltorCompany",
-            "username": "Chris Owen"
+            "name": "mysqls",
+            "database": "rieltorcompan",
+            "username": "root",
+            "password": ""
         }
     ]
 }
