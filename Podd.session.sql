@@ -96,13 +96,13 @@ create table sdelka -- таблица для сделок
 	type_sdelki_id int not null references "type_sdelki"("id_type_sdelki") -- внешний ключ на таблицу с видом сделки
 );
 
-create table position_s
+create table position_s -- таблица для должностей
 (
-	id_position serial not null constraint pk_position primary key,
-	position_name varchar(30),
-	salary decimal(38, 2),
-	otdel_id int not null references "otdel"("id_otdel"),
-	type_uslug_id int not null references "type_uslug"("id_type_uslug")
+	id_position serial not null constraint pk_position primary key, -- строка для первичного ключа
+	position_name varchar(30), -- строка для имени должности
+	salary decimal(38, 2), -- строка для зарплаты
+	otdel_id int not null references "otdel"("id_otdel"), -- строка для внешнего ключа на таблицу с отделами
+	type_uslug_id int not null references "type_uslug"("id_type_uslug") -- внешний ключ на таблицу с типами услуг
 );
 
 create table sotrudnik_position
