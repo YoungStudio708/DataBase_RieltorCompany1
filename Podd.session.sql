@@ -14,7 +14,7 @@ create table nedvijimost -- таблица для недвижимости
 	data_postrojki date not null, -- создание строки для указания даты постройки ссоружения
 	kollichestvo_komnat int not null check (kollichestvo_komnat > 0),--строка для указания количества комнат в выбранном жилом помещении с проверко, 
 	--чтоб камнат было больше нуля
-	razmer_uchastka decimal(38,2) not null check (razmer_uchastka > 0.0), -- строка для указания размера участка
+	razmer_uchastka decimal(38,2) not null check (razmer_uchastka > 0.0) default (0.0), -- строка для указания размера участка
 	razmer_jilogo_pomeschenija decimal(38,2) not null check(razmer_jilogo_pomeschenija > 0.0) default(0.0),
 	cell VARCHAR(10) not null
 	-- строка для указания размера жилого помещения.
