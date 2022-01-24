@@ -9,7 +9,7 @@ create table nedvijimost -- таблица для недвижимости
 ( -- начало
 	--creating primary key for nedvijimost table
 	id_nedvijimost serial not null constraint pk_nedvijimost primary key,
-	addresss varchar(50) not null constraint ui_address unique, -- создание строки для уникалььного адреса.
+	addresss varchar(200) not null constraint ui_address unique, -- создание строки для уникалььного адреса.
 	opisanie varchar(150) not null, -- создание строки для описания
 	data_postrojki date not null, -- создание строки для указания даты постройки ссоружения
 	kollichestvo_komnat int not null check (kollichestvo_komnat > 0),--строка для указания количества комнат в выбранном жилом помещении с проверко, 
@@ -21,9 +21,6 @@ create table nedvijimost -- таблица для недвижимости
 	-- строка для цены
 ); -- конец
 
---insert into nedvijimost (address, opisanie, data_postrojki, kollichestvo_komnat, 
-		--				razmer_uchastka, razmer_jilogo_pomeschenija)
---values ()
 
 create table type_uslug -- таблица для типов услуг
 (
@@ -32,8 +29,6 @@ create table type_uslug -- таблица для типов услуг
 	type_uslug_opisanie	varchar(30)	not null -- строка для описания
 );
 
---insert into type_uslug ()
---values()
 
 create  table otdel
 (
@@ -41,9 +36,6 @@ create  table otdel
 	otdel_name	Varchar(30) not null constraint ui_otdel_name unique, -- создание строки для имени отдела
 	otdel_opisanie	Varchar(30) not null -- создание строки для описания отдела
 );
-
---insert into otdel ()
---values()
 
 create table client
 (
@@ -57,9 +49,6 @@ create table client
 		Check(passport_number similar to '[0-9][0-9][0-9][0-9][0-9][0-9]' ), -- проверка для строки с номером паспорта
 	telephone_number	Varchar(16) not null -- строка для номера телефона
 );
-
--- insert into client
--- values()
 
 create table type_sdelki -- таблица для типа сделки
 (
