@@ -5,6 +5,7 @@
 */
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
+
 create table nedvijimost -- таблица для недвижимости
 ( -- начало
 	--creating primary key for nedvijimost table
@@ -33,7 +34,7 @@ create table type_uslug -- таблица для типов услуг
 create  table otdel
 (
 	id_otdel serial not null constraint pk_otdel primary key, -- создание первичного ключа для отделов
-	otdel_name	Varchar(30) not null constraint ui_otdel_name unique, -- создание строки для имени отдела
+	otdel_name	Varchar(60) not null constraint ui_otdel_name unique, -- создание строки для имени отдела
 	otdel_opisanie	VARCHAR(200) not null -- создание строки для описания отдела
 );
 
