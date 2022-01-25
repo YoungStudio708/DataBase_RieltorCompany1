@@ -47,7 +47,7 @@ create table client
 	passport_serija	Varchar(4) not null, -- строка для серии паспорта
 		Check(passport_serija similar to '[0-9][0-9][0-9][0-9]' ), -- проверка для строки с серией паспорта
 	passport_number	Varchar(6) not null, --- строка для номера паспорта
-		Check(passport_number similar to '[0-9][0-9][0-9][0-9][0-9][0-9]' ), -- проверка для строки с номером паспорта
+		Check(passport_number similar to '[0-9][0-9][0-9][0-9][0-9][0-9]'), -- проверка для строки с номером паспорта
 	telephone_number	Varchar(16) not null -- строка для номера телефона
 );
 
