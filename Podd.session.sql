@@ -64,7 +64,7 @@ create table sotrudnik -- таблица для сотрудников
 	last_name varchar(30) not null, -- строка для фамилии
 	first_name varchar(30) not null, -- строка для имени
 	otchestwo varchar(30) null default('-'), -- строка для отчества, заполнять не обязательно
-	telephone_number varchar(16) not null constraint ui_telephone_number unique, -- уникальная строка для уникального номера телефона
+	telephone_number varchar(18) not null constraint ui_telephone_number unique, -- уникальная строка для уникального номера телефона
 		check (telephone_number similar to '\+7\([0-9][0-9][0-9]\) [0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'), -- симуляция или маска
 	life_address varchar(200) not null, -- строка для адреса проживания сотрудника
 	birthday date not null, -- строка для указания дня рождения
