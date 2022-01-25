@@ -1,3 +1,6 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
 TRUNCATE TABLE nedvijimost;
 TRUNCATE TABLE otdel;
 TRUNCATE TABLE type_uslug;
