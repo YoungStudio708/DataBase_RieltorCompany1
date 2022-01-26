@@ -26,8 +26,8 @@ create table nedvijimost -- таблица для недвижимости
 create table type_uslug -- таблица для типов услуг
 (
 	id_type_uslug	serial not null constraint pk_type_uslug primary key, -- первичный ключ таблицы
-	type_uslug_name	varchar(30)	not null constraint ui_type_uslug_name unique, -- строка для типа услуг
-	type_uslug_opisanie	varchar(30)	not null -- строка для описания
+	type_uslug_name	varchar(60)	not null constraint ui_type_uslug_name unique, -- строка для типа услуг
+	type_uslug_opisanie	varchar(60)	not null -- строка для описания
 );
 
 
