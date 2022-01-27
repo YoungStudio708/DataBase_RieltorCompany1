@@ -1,1 +1,1 @@
-в
+CREATE OR REPLACE PROCEDURE nedvijimost_insert
