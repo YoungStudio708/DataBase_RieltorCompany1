@@ -169,3 +169,76 @@ AS $$
     END;
 $$;
 
+CREATE OR REPLACE PROCEDURE sdelka_insert
+    (p_id_sdelka INT, p_nazvanie VARCHAR(60), p_data_sdelki DATE ,
+    p_opisanie_sdilki VARCHAR (100), p_summa_sdelki DECIMAL (38,2), p_nedvijimost_id INT,
+    p_sotrudnic_id INT , p_client_id INT, p_type_sdelki_id INT)
+LANGUAGE plpgsql
+AS $$
+    DECLARE have_record INT ;
+
+    BEGIN
+
+        have_record := COUNT(*) FROM  sdelka
+        WHERE  nazvanie = p_nazvanie AND
+        data_sdelki = p_data_sdelki AND
+        opisanie_sdilki = p_opisanie_sdilki AND
+        summa_sdelki =p_summa_sdelki AND
+        nedvijimost_id = p_nedvijimost_id AND
+        sotrudnic_id = p_sotrudnic_id AND
+        client_id = p_client_id AND 
+        type_sdelki_id = p_type_sdelki_id;
+        
+    if have_record > 0 THEN
+        raise exception 'Already exists in table!';
+        ELSE
+            UPDATE sdelka SET 
+            nazvanie = p_nazvanie ,
+        data_sdelki = p_data_sdelki ,
+        opisanie_sdilki = p_opisanie_sdilki ,
+        summa_sdelki =p_summa_sdelki ,
+        nedvijimost_id = p_nedvijimost_id ,
+        sotrudnic_id = p_sotrudnic_id ,
+        client_id = p_client_id , 
+        type_sdelki_id = p_type_sdelki_id
+            WHERE id_sdelka = p_id_sdelka;
+            END if;
+    END;
+$$;
+/*
+CREATE OR REPLACE PROCEDURE sotrudnik_insert
+    (p_id_sotrudnik INT, p_last_name VARCHAR(30), p_first_name VARCHAR (30),
+    p_otchestwo VARCHAR (30), p_telephone_number VARCHAR (18), p_life_address VARCHAR (200),
+    p_birthday DATE , p_passport_serija VARCHAR(4), p_passport_number VARCHAR(6))
+LANGUAGE plpgsql
+AS $$
+    DECLARE have_record INT ;
+
+    BEGIN
+
+        have_record := COUNT(*) FROM  sotrudnik
+        WHERE  last_name = p_last_name AND
+        first_name = p_first_name AND
+        otchestwo = p_otchestwo AND
+        telephone_number = p_telephone_number AND
+        life_address =p_life_address AND
+        birthday = p_birthday AND
+        passport_serija = p_passport_serija AND
+        passport_number = p_passport_number;
+        
+    if have_record > 0 THEN
+        raise exception 'Already exists in table!';
+        ELSE
+            UPDATE sotrudnik SET 
+            last_name = p_last_name ,
+        first_name = p_first_name ,
+        otchestwo = p_otchestwo ,
+        telephone_number = p_telephone_number ,
+        life_address =p_life_address ,
+        birthday = p_birthday ,
+        passport_serija = p_passport_serija ,
+        passport_number = p_passport_number
+            WHERE id_sotrudnik = p_id_sotrudnik;
+            END if;
+    END;
+$$;
