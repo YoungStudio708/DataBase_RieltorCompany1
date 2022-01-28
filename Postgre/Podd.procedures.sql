@@ -6,8 +6,9 @@ CREATE OR REPLACE PROCEDURE nedvijimost_insert
 LANGUAGE plpgsql
 AS $$
 
-    DECLARE have_record INT;
+    
     BEGIN
+    DECLARE have_record INT;
         have_record := COUNT(*) from nedvijimost
             WHERE addresss = p_address 
                 AND opisanie = p_opisanie
@@ -18,7 +19,7 @@ AS $$
                 AND cell = p_cell;
 
             IF have_record > 0 THEN
-                raice exception('Already exists in table!');
+                raise exception'Already exists in table!';
             ELSE
                 UPDATE nedvijimost SET
                     addresss = p_address,
@@ -27,7 +28,7 @@ AS $$
                     kollichestvo_komnat = p_kollichestwo_komnat,
                     razmer_uchastka = p_razmer_uchastka ,
                     razmer_jilogo_pomeschenija = p_razmer_jilogo_pomeschenija,
-                    cell = p_cell;
+                    cell = p_cell
                 WHERE id_nedvijimost = p_id_nedvijimost;
                 END if;
     END;
