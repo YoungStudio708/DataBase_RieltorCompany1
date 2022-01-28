@@ -41,7 +41,6 @@ AS $$
 
     DECLARE have_record INT;
     BEGIN
-
         have_record := COUNT(*) from type_uslug
         WHERE type_uslug_name = p_type_uslug_name AND type_uslug_opisanie = p_type_uslug_opisanie;
         IF have_record > 0 THEN
@@ -54,3 +53,6 @@ AS $$
                 END if;
     END;
 $$;
+
+CREATE OR REPLACE PROCEDURE otdel_insert
+()
