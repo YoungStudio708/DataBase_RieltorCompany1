@@ -55,4 +55,40 @@ AS $$
 $$;
 
 CREATE OR REPLACE PROCEDURE otdel_insert
+(p_id_otdel INT, p_otdel_name VARCHAR(60), p_otdel_opisanie VARCHAR(200))
+LANGUAGE plpgsql
+AS $$
+
+    DECLARE have_record INT;
+    BEGIN
+        have_record := COUNT(*) from otdel
+        WHERE otdel_name = p_otdel_name AND otdel_opisanie = p_otdel_opisanie;
+        IF have_record > 0 THEN
+                raise exception'Already exists in table!';
+            ELSE
+                UPDATE otdel SET
+                    otdel_name = p_otdel_name,
+                    otdel_opisanie = p_otdel_opisanie
+                WHERE id_otdel = p_id_otdel;
+                END if;
+    END;
+$$;
+/*
+CREATE OR REPLACE PROCEDURE client_insert
 ()
+LANGUAGE plpgsql
+AS $$
+
+    DECLARE have_record INT;
+    BEGIN
+        have_record := COUNT(*) from client
+        WHERE otdel_name = p_otdel_name AND otdel_opisanie = p_otdel_opisanie;
+        IF have_record > 0 THEN
+                raise exception'Already exists in table!';
+            ELSE
+                UPDATE client SET
+                    
+                WHERE id_otdel = p_id_otdel;
+                END if;
+    END;
+$$;
