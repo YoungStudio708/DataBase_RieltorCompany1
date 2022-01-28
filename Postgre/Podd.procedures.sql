@@ -75,20 +75,34 @@ AS $$
 $$;
 /*
 CREATE OR REPLACE PROCEDURE client_insert
-()
+    (p_id_client INT, p_last_name VARCHAR(30), p_first_name VARCHAR(30),
+    p_otchestwo VARCHAR(30), p_passport_serija VARCHAR(4), p_passport_number VARCHAR(6),
+    p_telephone_number VARCHAR(16))
 LANGUAGE plpgsql
 AS $$
 
     DECLARE have_record INT;
     BEGIN
+    
         have_record := COUNT(*) from client
-        WHERE otdel_name = p_otdel_name AND otdel_opisanie = p_otdel_opisanie;
+        WHERE last_name = p_last_name AND 
+            first_name = p_first_name AND
+            otchestwo = p_otchestwo AND
+            passport_serija = p_passport_serija AND
+            passport_number = p_passport_number AND
+            telephone_number = p_telephone_number;
+
         IF have_record > 0 THEN
                 raise exception'Already exists in table!';
             ELSE
                 UPDATE client SET
-                    
-                WHERE id_otdel = p_id_otdel;
+                    last_name = p_last_name ,
+            first_name = p_first_name ,
+            otchestwo = p_otchestwo ,
+            passport_serija = p_passport_serija ,
+            passport_number = p_passport_number ,
+            telephone_number = p_telephone_number
+                WHERE id_client = p_id_client;
                 END if;
     END;
 $$;
