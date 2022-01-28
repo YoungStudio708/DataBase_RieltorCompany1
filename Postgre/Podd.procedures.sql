@@ -6,9 +6,9 @@ CREATE OR REPLACE PROCEDURE nedvijimost_insert
 LANGUAGE plpgsql
 AS $$
 
-    
-    BEGIN
     DECLARE have_record INT;
+    BEGIN
+    
         have_record := COUNT(*) from nedvijimost
             WHERE addresss = p_address 
                 AND opisanie = p_opisanie
@@ -30,6 +30,27 @@ AS $$
                     razmer_jilogo_pomeschenija = p_razmer_jilogo_pomeschenija,
                     cell = p_cell
                 WHERE id_nedvijimost = p_id_nedvijimost;
+                END if;
+    END;
+$$;
+
+CREATE OR REPLACE PROCEDURE type_uslug_insert
+    (p_id_type_uslug INT, p_type_uslug_name VARCHAR(60), p_type_uslug_opisanie VARCHAR(60))
+LANGUAGE plpgsql
+AS $$
+
+    DECLARE have_record INT;
+    BEGIN
+
+        have_record := COUNT(*) from type_uslug
+        WHERE type_uslug_name = p_type_uslug_name AND type_uslug_opisanie = p_type_uslug_opisanie;
+        IF have_record > 0 THEN
+                raise exception'Already exists in table!';
+            ELSE
+                UPDATE nedvijimost SET
+                    type_uslug_name = p_type_uslug_name,
+                    type_uslug_opisanie = p_type_uslug_opisanie
+                WHERE id_type_uslug = p_id_type_uslug;
                 END if;
     END;
 $$;
