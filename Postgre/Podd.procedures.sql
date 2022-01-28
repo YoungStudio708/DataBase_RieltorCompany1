@@ -205,40 +205,33 @@ AS $$
             END if;
     END;
 $$;
-/*
-CREATE OR REPLACE PROCEDURE sotrudnik_insert
-    (p_id_sotrudnik INT, p_last_name VARCHAR(30), p_first_name VARCHAR (30),
-    p_otchestwo VARCHAR (30), p_telephone_number VARCHAR (18), p_life_address VARCHAR (200),
-    p_birthday DATE , p_passport_serija VARCHAR(4), p_passport_number VARCHAR(6))
+
+CREATE OR REPLACE PROCEDURE position_s_insert
+    (p_id_position INT, p_position_name VARCHAR(30), p_salary DECIMAL (38,2),
+    p_otdel_id INT, p_type_uslug_id INT)
 LANGUAGE plpgsql
 AS $$
     DECLARE have_record INT ;
 
     BEGIN
 
-        have_record := COUNT(*) FROM  sotrudnik
-        WHERE  last_name = p_last_name AND
-        first_name = p_first_name AND
-        otchestwo = p_otchestwo AND
-        telephone_number = p_telephone_number AND
-        life_address =p_life_address AND
-        birthday = p_birthday AND
-        passport_serija = p_passport_serija AND
-        passport_number = p_passport_number;
-        
+        have_record := COUNT(*) FROM  position_s
+        WHERE  position_name = p_position_name AND
+        salary = p_salary AND
+        otdel_id = p_otdel_id AND
+        type_uslug_id = p_type_uslug_id ;
+                
     if have_record > 0 THEN
         raise exception 'Already exists in table!';
         ELSE
-            UPDATE sotrudnik SET 
-            last_name = p_last_name ,
-        first_name = p_first_name ,
-        otchestwo = p_otchestwo ,
-        telephone_number = p_telephone_number ,
-        life_address =p_life_address ,
-        birthday = p_birthday ,
-        passport_serija = p_passport_serija ,
-        passport_number = p_passport_number
-            WHERE id_sotrudnik = p_id_sotrudnik;
+            UPDATE position_s SET 
+            position_name = p_position_name ,
+        salary = p_salary ,
+        otdel_id = p_otdel_id ,
+        type_uslug_id = p_type_uslug_id
+            WHERE id_position = p_id_position;
             END if;
     END;
 $$;
+
+-- new procedure for sotrudnik_position and sotrudnik_otdel
