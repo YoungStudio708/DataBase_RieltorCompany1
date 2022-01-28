@@ -29,5 +29,6 @@ AS $$
                     razmer_jilogo_pomeschenija = p_razmer_jilogo_pomeschenija,
                     cell = p_cell;
                 WHERE id_nedvijimost = p_id_nedvijimost;
+                END if;
     END;
 $$;
