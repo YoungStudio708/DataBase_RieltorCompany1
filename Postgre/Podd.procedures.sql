@@ -234,4 +234,48 @@ AS $$
     END;
 $$;
 
--- new procedure for sotrudnik_position and sotrudnik_otdel
+CREATE OR REPLACE PROCEDURE sotrudnik_position_insert
+    (p_id_sotrudnik_position INT, p_sotrudnik_id INT, p_position_id INT)
+LANGUAGE plpgsql
+AS $$
+    DECLARE have_record INT ;
+
+    BEGIN
+
+        have_record := COUNT(*) FROM  sotrudnik_position
+        WHERE  sotrudnik_id = p_sotrudnik_id AND
+        position_id = p_position_id ;
+                
+    if have_record > 0 THEN
+        raise exception 'Already exists in table!';
+        ELSE
+            UPDATE sotrudnik_position SET 
+            sotrudnik_id = p_sotrudnik_id ,
+            position_id = p_position_id
+            WHERE id_sotrudnik_position = p_id_sotrudnik_position;
+            END if;
+    END;
+$$;
+
+CREATE OR REPLACE PROCEDURE sotrudnik_otdel_insert
+    (p_id_sotrudnik_otdel INT, p_sotrudnik_id INT, p_otdel_id INT)
+LANGUAGE plpgsql
+AS $$
+    DECLARE have_record INT ;
+
+    BEGIN
+
+        have_record := COUNT(*) FROM  sotrudnik_otdel
+        WHERE  sotrudnik_id = p_sotrudnik_id AND
+        otdel_id = p_otdel_id ;
+                
+    if have_record > 0 THEN
+        raise exception 'Already exists in table!';
+        ELSE
+            UPDATE sotrudnik_otdel SET 
+            sotrudnik_id = p_sotrudnik_id ,
+            otdel_id = p_otdel_id
+            WHERE id_sotrudnik_otdel = p_id_sotrudnik_otdel;
+            END if;
+    END;
+$$;
