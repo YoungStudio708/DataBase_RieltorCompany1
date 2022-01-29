@@ -1,0 +1,1 @@
+CREATE OR REPLACE FUNCTION SalaryCalculatingForStaff (p_id_sotrudnik_position INT, )
