@@ -1,8 +1,10 @@
-CREATE VIEW client_view
+CREATE OR REPLACE VIEW workingbook_view
 AS
 SELECT 
-    id_client, last_name, first_name, 
-    otchestwo, passport_serija, passport_number, 
-    telephone_number
-  FROM client;
-  SELECT * FROM client_view;
+    CONCAT(last_name, ' ', SUBSTRING(first_name, 1, 1), '.', SUBSTRING(otchestwo, 1, 1), '. ',
+            'Passport: ', passport_serija, '-', passport_number, '.') AS "Passport data",
+    CONCAT('Phone number: ', telephone_number, 
+            'Life address: ', life_address, '.') AS "Contact information"
+    FROM sotrudnik_position
+    INNER JOIN  sotrudnik ON sotrudnik_id = id_sotrudnik
+    INNER JOIN  position_s ON position_id = id_position;
