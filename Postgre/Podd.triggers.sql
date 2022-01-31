@@ -17,7 +17,7 @@ begin
 insert into sotrudnik_history(status_rec, sotrudnik_info, post_info)
 values ('Новая запись',
 (select last_name||' '||first_name||' '||otchestwo from sotrudnik where id_sotrudnik = NEW.id_sotrudnik),
-(select position_name||', Оклад: '||salary from position_s where id_position = NEW.dolzhnost_id));
+(select position_name||', Оклад: '||salary from position_s where id_position = NEW.position_id));
 return new;
 end;
 
