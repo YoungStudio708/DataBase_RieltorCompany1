@@ -83,12 +83,16 @@ create table sdelka -- таблица для сделок
 	nazvanie varchar(60) not null, -- строка для имени сделки
 	data_sdelki date not null, -- строка для указания даты сделки
 	opisanie_sdilki varchar(100) not null, -- строка для описания сделки
-	summa_sdelki decimal(38,2) not null,-- строка для указания суммы сделки
+	summa_sdelki decimal(38,2) not null-- строка для указания суммы сделки
 		check (summa_sdelki >= 0.0), -- проверка, чтобы сумма была не меньше нуля
-	nedvijimost_id int not null references "nedvijimost"("id_nedvijimost"), -- внешний ключ на таблицу для недвижимости
-	sotrudnic_id int not null references "sotrudnik"("id_sotrudnik"), -- внешний ключ на таблицу с сотрудниками
-	client_id int not null references "client"("id_client"), -- внешний ключ на таблицу с клиентами
-	type_sdelki_id int not null references "type_sdelki"("id_type_sdelki") -- внешний ключ на таблицу с видом сделки
+        nedvijimost_id INT NOT NULL,
+        sotrudnic_id INT NOT NULL,
+        client_id INT NOT NULL,
+        type_sdelki_id INT NOT NULL,
+	FOREIGN KEY (nedvijimost_id) REFERENCES  nedvijimost (id_nedvijimost), -- внешний ключ на таблицу для недвижимости
+	FOREIGN KEY (sotrudnic_id) REFERENCES  sotrudnik (id_sotrudnik), -- внешний ключ на таблицу с сотрудниками
+	FOREIGN KEY (client_id) REFERENCES  client (id_client), -- внешний ключ на таблицу с клиентами
+	FOREIGN KEY (type_sdelki_id) REFERENCES  type_sdelki (id_type_sdelki) -- внешний ключ на таблицу с видом сделки
 );
 
 create table position_s -- таблица для должностей
@@ -96,30 +100,28 @@ create table position_s -- таблица для должностей
 	id_position INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- строка для первичного ключа
 	position_name varchar(30), -- строка для имени должности
 	salary decimal(38, 2), -- строка для зарплаты
-	otdel_id int not null references "otdel"("id_otdel"), -- строка для внешнего ключа на таблицу с отделами
-	type_uslug_id int not null references "type_uslug"("id_type_uslug"),
+    otdel_id INT NOT NULL,
+    type_uslug_id INT NOT NULL,
+	FOREIGN KEY (otdel_id) REFERENCES  otdel (id_otdel), -- строка для внешнего ключа на таблицу с отделами
+	FOREIGN KEY (type_uslug_id) REFERENCES  type_uslug (id_type_uslug),
     constraint ch_position_name
         check (position_name REGEXP '^[a-zA-Z]+$') -- внешний ключ на таблицу с типами услуг
 );
-/*
+
 create table sotrudnik_position -- таблица для общей таблицы сотрудника и должности
 (
-	id_sotrudnik_position serial not null constraint pk_sotrudnik_position primary key, -- первичный ключ
-	sotrudnik_id int not null references "sotrudnik"("id_sotrudnik"), -- внешний ключ на сотрудника
-	position_id int not null references "position_s"("id_position") -- внешний ключ на должности
+	id_sotrudnik_position INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    sotrudnic_id INT NOT NULL,
+    position_id INT NOT NULL, -- первичный ключ
+	FOREIGN KEY (sotrudnic_id) REFERENCES  sotrudnik (id_sotrudnik), -- внешний ключ на сотрудника
+	FOREIGN KEY (position_id) REFERENCES  sotrudnik (id_sotrudnik) -- внешний ключ на должности
 );
-/*
+
 create table sotrudnik_otdel -- таблица для работников отдела
 (
-	id_sotrudnik_otdel serial not null constraint pk_sotrudnik_otdel primary key, -- первичный ключ
-	sotrudnik_id int not null references "sotrudnik"("id_sotrudnik"), -- внешний ключ на сотрудника
-	otdel_id int not null references "otdel"("id_otdel") -- внешний ключ на отделы
+	id_sotrudnik_otdel INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- первичный ключ
+	sotrudnik_id int not null , -- внешний ключ на сотрудника
+	otdel_id int not null,
+    FOREIGN KEY (sotrudnik_id) REFERENCES  sotrudnik (id_sotrudnik),
+    FOREIGN KEY (otdel_id) REFERENCES  otdel (id_otdel) -- внешний ключ на отделы
 );
-/*
-CREATE TABLE position_otdel_type_uslug
-(
-	id_position_otdel_type_uslug serial not null constraint pk_position_otdel_type_uslug primary key,
-	position_id int not null REFERENCES "position_s"("id_position"),
-	otdel_id int not null REFERENCES "otdel"("id_otdel")
-	type_uslug_id int not null REFERENCES "type_uslug"("id_type_uslug")
-)
