@@ -76,10 +76,10 @@ create table sotrudnik -- таблица для сотрудников
 	passport_number	Varchar(6) not null constraint ch_passport_number_one --- строка для номера паспорта
 		Check (passport_number REGEXP '^[0-9]+$') -- маска
 );
-/*
+
 create table sdelka -- таблица для сделок
 (
-	id_sdelka serial not null constraint pk_sdelka primary key, -- первичный ключ
+	id_sdelka INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- первичный ключ
 	nazvanie varchar(60) not null, -- строка для имени сделки
 	data_sdelki date not null, -- строка для указания даты сделки
 	opisanie_sdilki varchar(100) not null, -- строка для описания сделки
@@ -90,14 +90,16 @@ create table sdelka -- таблица для сделок
 	client_id int not null references "client"("id_client"), -- внешний ключ на таблицу с клиентами
 	type_sdelki_id int not null references "type_sdelki"("id_type_sdelki") -- внешний ключ на таблицу с видом сделки
 );
-/*
+
 create table position_s -- таблица для должностей
 (
-	id_position serial not null constraint pk_position primary key, -- строка для первичного ключа
+	id_position INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- строка для первичного ключа
 	position_name varchar(30), -- строка для имени должности
 	salary decimal(38, 2), -- строка для зарплаты
 	otdel_id int not null references "otdel"("id_otdel"), -- строка для внешнего ключа на таблицу с отделами
-	type_uslug_id int not null references "type_uslug"("id_type_uslug") -- внешний ключ на таблицу с типами услуг
+	type_uslug_id int not null references "type_uslug"("id_type_uslug"),
+    constraint ch_position_name
+        check (position_name REGEXP '^[a-zA-Z]+$') -- внешний ключ на таблицу с типами услуг
 );
 /*
 create table sotrudnik_position -- таблица для общей таблицы сотрудника и должности
