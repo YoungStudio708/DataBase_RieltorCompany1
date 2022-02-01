@@ -111,13 +111,7 @@ create table sotrudnik_otdel -- таблица для работников от�
 	otdel_id int not null references "otdel"("id_otdel") -- внешний ключ на отделы
 );
 
-CREATE TABLE position_otdel_type_uslug
-(
-	id_position_otdel_type_uslug serial not null constraint pk_position_otdel_type_uslug primary key,
-	position_id int not null REFERENCES "position_s"("id_position"),
-	otdel_id int not null REFERENCES "otdel"("id_otdel")
-	type_uslug_id int not null REFERENCES "type_uslug"("id_type_uslug")
-)
+
 
 
 
