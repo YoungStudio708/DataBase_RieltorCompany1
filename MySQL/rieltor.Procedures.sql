@@ -1,5 +1,5 @@
 DELIMITER //
-create procedure BookLibrary_Insert (p_LibraryAddress varchar(100),
+create procedure nedvijimost_insert (p_LibraryAddress varchar(100),
     p_OpeningTime time, p_ClosingTime time, p_NumberOfRentalHours int)
 begin
 	declare have_record int;
