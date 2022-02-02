@@ -22,6 +22,19 @@
             "database": "rieltorCompany",
             "username": "postgres",
             "password": "123"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "my",
+            "database": "rieltor",
+            "username": "root",
+            "password": "11Grga2003!"
         }
     ]
 }
