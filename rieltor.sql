@@ -38,10 +38,10 @@ create table client
 	otchestwo	Varchar(30) null default ('-'), -- строка для отчества
 	passport_serija	Varchar(4) not null , -- проверка для строки с серией паспорта
 	passport_number	Varchar(6) not null, -- проверка для строки с номером паспорта
-	telephone_number Varchar(16) not null check (telephone_number like '+7(___)-___-__-__'),
+	telephone_number Varchar(16) not null,
 
     constraint ch_last_name
-        check (last_name REGEXP '^[a-zA-Z]+$'),
+        check (last_name REGEXP '^[а-яА-Яa-zA-Z]+$'),
     constraint ch_first_name
         check (first_name REGEXP '^[a-zA-Z]+$'),
     constraint ch_otchestwo
@@ -49,7 +49,9 @@ create table client
 	constraint ch_passport_serija -- строка для серии паспорта
 		check (passport_serija REGEXP '^[0-9]+$'),
 	constraint ch_passport_number --- строка для номера паспорта
-		check (passport_number REGEXP '^[0-9]+$')
+		check (passport_number REGEXP '^[0-9]+$'),
+	constraint ch_telephone_number
+		 check (telephone_number like '+7(___)-___-__-__')
 );
 
 create table type_sdelki -- таблица для типа сделки
