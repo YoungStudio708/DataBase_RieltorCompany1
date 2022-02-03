@@ -24,3 +24,35 @@ begin
 			p_cell);
 	end if;
 end;
+
+DELIMITER //
+create procedure type_uslug_insert (p_type_uslug_name varchar(60),
+    p_type_uslug_opisanie VARCHAR(60))
+begin
+	declare have_record int;
+    select count(*) into have_record from type_uslug
+	where type_uslug_name = p_type_uslug_name
+		and type_uslug_opisanie = p_type_uslug_opisanie;
+	if have_record > 0 then
+		select 'There is already book library with the specified data.' as "Error";
+    else
+		insert into type_uslug (type_uslug_name, type_uslug_opisanie)
+		values (p_type_uslug_name, p_type_uslug_opisanie);
+	end if;
+end;
+
+DELIMITER //
+create procedure type_uslug_insert (p_type_uslug_name varchar(60),
+    p_type_uslug_opisanie VARCHAR(60))
+begin
+	declare have_record int;
+    select count(*) into have_record from type_uslug
+	where type_uslug_name = p_type_uslug_name
+		and type_uslug_opisanie = p_type_uslug_opisanie;
+	if have_record > 0 then
+		select 'There is already book library with the specified data.' as "Error";
+    else
+		insert into type_uslug (type_uslug_name, type_uslug_opisanie)
+		values (p_type_uslug_name, p_type_uslug_opisanie);
+	end if;
+end;
