@@ -96,4 +96,24 @@ CALL position_s_insert('Специалист по аренде', 50000, 3, 4);
 CALL position_s_insert('Менеджер', 70000, 8, 6);
 CALL position_s_insert('Специалист по безопасности', 60000, 9, 8);
 
+CALL sotrudnik_position_insert(10, 3);
+CALL sotrudnik_position_insert(8, 3);
+CALL sotrudnik_position_insert(9, 1);
+CALL sotrudnik_position_insert(5, 9);
+CALL sotrudnik_position_insert(3, 8);
+CALL sotrudnik_position_insert(4, 2);
+CALL sotrudnik_position_insert(2, 5);
+CALL sotrudnik_position_insert(1, 8);
+CALL sotrudnik_position_insert(6, 10);
+CALL sotrudnik_position_insert(7, 7);
 
+CALL sotrudnik_otdel_insert(10, 1);
+CALL sotrudnik_otdel_insert(8, 2);
+CALL sotrudnik_otdel_insert(9, 5);
+CALL sotrudnik_otdel_insert(5, 8);
+CALL sotrudnik_otdel_insert(3, 2);
+CALL sotrudnik_otdel_insert(4, 5);
+CALL sotrudnik_otdel_insert(2, 10);
+CALL sotrudnik_otdel_insert(1, 2);
+CALL sotrudnik_otdel_insert(6, 9);
+CALL sotrudnik_otdel_insert(7, 5);
