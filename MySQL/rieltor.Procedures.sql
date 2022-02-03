@@ -14,7 +14,7 @@ begin
 		AND razmer_jilogo_pomeschenija = p_razmer_jilogo_pomeschenija
 		AND cell = p_cell;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into nedvijimost (addresss, opisanie, data_postrojki,
 			kollichestvo_komnat, razmer_uchastka, razmer_jilogo_pomeschenija,
@@ -34,7 +34,7 @@ begin
 	where type_uslug_name = p_type_uslug_name
 		and type_uslug_opisanie = p_type_uslug_opisanie;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into type_uslug (type_uslug_name, type_uslug_opisanie)
 		values (p_type_uslug_name, p_type_uslug_opisanie);
@@ -50,7 +50,7 @@ begin
 	where otdel_name = p_otdel_name
 		and otdel_opisanie = p_otdel_opisanie;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into otdel (otdel_name, otdel_opisanie)
 		values (p_otdel_name, p_otdel_opisanie);
@@ -71,7 +71,7 @@ begin
             passport_number = p_passport_number AND
             telephone_number = p_telephone_number;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into client (last_name, first_name, otchestwo, passport_serija, passport_number, telephone_number)
 		values (p_last_name, p_first_name, p_otchestwo, p_passport_serija, p_passport_number, p_telephone_number);
@@ -87,7 +87,7 @@ begin
 	where type_sdelki_opisanie = p_type_sdelki_opisanie AND 
         type_sdelki_name = p_type_sdelki_name;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into type_sdelki (type_sdelki_opisanie, type_sdelki_name)
 		values (p_type_sdelki_opisanie, p_type_sdelki_name);
@@ -110,7 +110,7 @@ begin
         passport_serija = p_passport_serija AND
         passport_number = p_passport_number;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into sotrudnik (last_name, first_name, otchestwo,
 		telephone_number, life_address, birthday,
@@ -137,7 +137,7 @@ begin
         client_id = p_client_id AND 
         type_sdelki_id = p_type_sdelki_id;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into sdelka (nazvanie, data_sdelki, opisanie_sdilki,
 		summa_sdelki, nedvijimost_id, sotrudnic_id,
@@ -159,7 +159,7 @@ begin
         otdel_id = p_otdel_id AND
         type_uslug_id = p_type_uslug_id ;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into position_s (position_name, salary,
 		otdel_id, type_uslug_id)
@@ -177,7 +177,7 @@ begin
 	where sotrudnic_id = p_sotrudnic_id AND
         position_id = p_position_id ;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into sotrudnik_position (sotrudnic_id, position_id)
 		values (p_sotrudnic_id, p_position_id);
@@ -193,7 +193,7 @@ begin
 	where sotrudnik_id = p_sotrudnik_id AND
         otdel_id = p_otdel_id ;
 	if have_record > 0 then
-		select 'There is already book library with the specified data.' as "Error";
+		select 'Это уже есть в базе!' as "Error";
     else
 		insert into sotrudnik_otdel (sotrudnik_id, otdel_id)
 		values (p_sotrudnik_id, p_otdel_id);

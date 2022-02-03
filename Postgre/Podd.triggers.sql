@@ -2,9 +2,9 @@
 create table sotrudnik_history
 (
 id_sotrudnik_history SERIAL not null constraint pk_sotrudnik_history primary key,
-status_rec varchar not null,
-sotrudnik_info varchar not null,
-post_info varchar not null,
+status_rec varchar(20) not null,
+sotrudnik_info varchar(20) not null,
+post_info varchar(20) not null,
 create_date timestamp null default(now()::timestamp)
 );
 
