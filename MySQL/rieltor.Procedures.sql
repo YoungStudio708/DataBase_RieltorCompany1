@@ -169,18 +169,18 @@ begin
 end;
 
 DELIMITER //
-create procedure sotrudnik_position_insert (p_sotrudnik_id INT, 
+create procedure sotrudnik_position_insert (p_sotrudnic_id INT, 
 p_position_id INT)
 begin
 	declare have_record int;
     select count(*) into have_record from sotrudnik_position
-	where sotrudnik_id = p_sotrudnik_id AND
+	where sotrudnic_id = p_sotrudnic_id AND
         position_id = p_position_id ;
 	if have_record > 0 then
 		select 'There is already book library with the specified data.' as "Error";
     else
-		insert into sotrudnik_position (sotrudnik_id, position_id)
-		values (p_sotrudnik_id, p_position_id);
+		insert into sotrudnik_position (sotrudnic_id, position_id)
+		values (p_sotrudnic_id, p_position_id);
 	end if;
 end;
 
