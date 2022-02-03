@@ -8,8 +8,7 @@ CREATE TABLE nedvijimost
 	addresss VARCHAR(200) NOT NULL unique, -- создание строки для уникалььного адреса.
 	opisanie VARCHAR(150) NOT NULL, -- создание строки для описания
 	data_postrojki date NOT NULL, -- создание строки для указания даты постройки ссоружения
-	kollichestvo_komnat int NOT NULL check (kollichestvo_komnat > 0),--строка для указания количества комнат в выбранном жилом помещении с проверко, 
-	--чтоб камнат было больше нуля
+	kollichestvo_komnat int NOT NULL check (kollichestvo_komnat > 0), 
 	razmer_uchastka decimal(38,2) NOT NULL default 0.0 check (razmer_uchastka >= 0.0), -- строка для указания размера участка
 	razmer_jilogo_pomeschenija decimal(38,2) NOT NULL default 0.0 check (razmer_jilogo_pomeschenija >= 0.0),
 	cell VARCHAR(10) NOT NULL
@@ -38,30 +37,26 @@ create table client
 	otchestwo	Varchar(30) null default ('-'), -- строка для отчества
 	passport_serija	Varchar(4) not null , -- проверка для строки с серией паспорта
 	passport_number	Varchar(6) not null, -- проверка для строки с номером паспорта
-	telephone_number Varchar(16) not null,
+	telephone_number Varchar(19) not null,
 
     constraint ch_last_name
-        check (last_name REGEXP '^[а-яА-Яa-zA-Z]+$'),
+        check (last_name REGEXP '^[а-яА-Я]+$'),
     constraint ch_first_name
-        check (first_name REGEXP '^[а-яА-Яa-zA-Z]+$'),
+        check (first_name REGEXP '^[а-яА-Я]+$'),
     constraint ch_otchestwo
-        check (otchestwo REGEXP '^[а-яА-Яa-zA-Z]+$'),
+        check (otchestwo REGEXP '^[а-яА-Я]+$'),
 	constraint ch_passport_serija -- строка для серии паспорта
 		check (passport_serija REGEXP '^[0-9]+$'),
-	constraint ch_passport_number --- строка для номера паспорта
-		check (passport_number REGEXP '^[0-9]+$'),
-	constraint ch_telephone_number
-		 check (telephone_number like '+7(___)-___-__-__')
+	constraint ch_passport_number -- строка для номера паспорта
+		check (passport_number REGEXP '^[0-9]+$')
+	
 );
 
 create table type_sdelki -- таблица для типа сделки
 (
 	id_type_sdelki INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- первичный ключ
-	type_sdelki_opisanie varchar(30), -- строка для описания типа сделки
-	type_sdelki_name varchar(30) not null,
-	
-	constraint ch_type_sdelki_name
-        check (type_sdelki_name REGEXP '^[a-zA-Z]+$') -- строка для имени типа сделки
+	type_sdelki_opisanie varchar(60), -- строка для описания типа сделки
+	type_sdelki_name varchar(30) not null
 );
 
 create table sotrudnik -- таблица для сотрудников
@@ -84,10 +79,9 @@ create table sotrudnik -- таблица для сотрудников
         check (otchestwo REGEXP '^[а-яА-Яa-zA-Z]+$'),
 	 constraint ch_passport_serija_one -- строка для серии паспорта
 		Check (passport_serija REGEXP '^[0-9]+$'),
-	 constraint ch_passport_number_one --- строка для номера паспорта
-		Check (passport_number REGEXP '^[0-9]+$'),
-	constraint ch_telephone_number_one
-			check (telephone_number like '+7(___)-___-__-__')
+	 constraint ch_passport_number_one -- строка для номера паспорта
+		Check (passport_number REGEXP '^[0-9]+$')
+	
 	
 );
 
@@ -117,9 +111,8 @@ create table position_s -- таблица для должностей
     otdel_id INT NOT NULL,
     type_uslug_id INT NOT NULL,
 	FOREIGN KEY (otdel_id) REFERENCES  otdel (id_otdel), -- строка для внешнего ключа на таблицу с отделами
-	FOREIGN KEY (type_uslug_id) REFERENCES  type_uslug (id_type_uslug),
-    constraint ch_position_name
-        check (position_name REGEXP '^[а-яА-Яa-zA-Z]+$') -- внешний ключ на таблицу с типами услуг
+	FOREIGN KEY (type_uslug_id) REFERENCES  type_uslug (id_type_uslug)
+     -- внешний ключ на таблицу с типами услуг
 );
 
 create table sotrudnik_position -- таблица для общей таблицы сотрудника и должности
