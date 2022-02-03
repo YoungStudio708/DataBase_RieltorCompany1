@@ -10,8 +10,8 @@ CREATE TABLE nedvijimost
 	data_postrojki date NOT NULL, -- создание строки для указания даты постройки ссоружения
 	kollichestvo_komnat int NOT NULL check (kollichestvo_komnat > 0),--строка для указания количества комнат в выбранном жилом помещении с проверко, 
 	--чтоб камнат было больше нуля
-	razmer_uchastka decimal(38,2) NOT NULL check (razmer_uchastka > 0.0) default (0.0), -- строка для указания размера участка
-	razmer_jilogo_pomeschenija decimal(38,2) NOT NULL check(razmer_jilogo_pomeschenija > 0.0) default(0.0),
+	razmer_uchastka decimal(38,2) NOT NULL default 0.0 check (razmer_uchastka >= 0.0), -- строка для указания размера участка
+	razmer_jilogo_pomeschenija decimal(38,2) NOT NULL default 0.0 check (razmer_jilogo_pomeschenija >= 0.0),
 	cell VARCHAR(10) NOT NULL
 );
 
@@ -36,45 +36,56 @@ create table client
 	last_name	Varchar(30) not null, -- строка для фамилии
 	first_name	Varchar(30) not null, -- строка для имени
 	otchestwo	Varchar(30) null default ('-'), -- строка для отчества
-	passport_serija	Varchar(4) not null constraint ch_passport_serija -- строка для серии паспорта
-		Check (passport_serija REGEXP '^[0-9]+$'), -- проверка для строки с серией паспорта
-	passport_number	Varchar(6) not null constraint ch_passport_number --- строка для номера паспорта
-		Check (passport_number REGEXP '^[0-9]+$'), -- проверка для строки с номером паспорта
-	telephone_number	Varchar(16) not null check (telephone_number like '+7(___)-___-__-__'),
+	passport_serija	Varchar(4) not null , -- проверка для строки с серией паспорта
+	passport_number	Varchar(6) not null, -- проверка для строки с номером паспорта
+	telephone_number Varchar(16) not null check (telephone_number like '+7(___)-___-__-__'),
 
     constraint ch_last_name
         check (last_name REGEXP '^[a-zA-Z]+$'),
     constraint ch_first_name
         check (first_name REGEXP '^[a-zA-Z]+$'),
     constraint ch_otchestwo
-        check (otchestwo REGEXP '^[a-zA-Z]+$')
+        check (otchestwo REGEXP '^[a-zA-Z]+$'),
+	constraint ch_passport_serija -- строка для серии паспорта
+		check (passport_serija REGEXP '^[0-9]+$'),
+	constraint ch_passport_number --- строка для номера паспорта
+		check (passport_number REGEXP '^[0-9]+$')
 );
 
 create table type_sdelki -- таблица для типа сделки
 (
 	id_type_sdelki INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- первичный ключ
 	type_sdelki_opisanie varchar(30), -- строка для описания типа сделки
-	type_sdelki_name varchar(30) not null constraint ch_type_sdelki_name
+	type_sdelki_name varchar(30) not null,
+	
+	constraint ch_type_sdelki_name
         check (type_sdelki_name REGEXP '^[a-zA-Z]+$') -- строка для имени типа сделки
 );
 
 create table sotrudnik -- таблица для сотрудников
 (
 	id_sotrudnik INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- первичный ключ
-	last_name varchar(30) not null constraint ch_last_name_one
-        check (last_name REGEXP '^[a-zA-Z]+$'), -- строка для фамилии
-	first_name varchar(30) not null constraint ch_first_name_one
-        check (first_name REGEXP '^[a-zA-Z]+$'), -- строка для имени
-	otchestwo varchar(30) null default('-') constraint ch_otchestwo_one
-        check (otchestwo REGEXP '^[a-zA-Z]+$'), -- строка для отчества, заполнять не обязательно
+	last_name varchar(30) not null, -- строка для фамилии
+	first_name varchar(30) not null, -- строка для имени
+	otchestwo varchar(30) null default('-'), -- строка для отчества, заполнять не обязательно
 	telephone_number varchar(18) not null unique -- уникальная строка для уникального номера телефона
 		check (telephone_number like '+7(___)-___-__-__'), -- симуляция или маска
 	life_address varchar(200) not null, -- строка для адреса проживания сотрудника
 	birthday date not null, -- строка для указания дня рождения
-	passport_serija	Varchar(4) not null constraint ch_passport_serija_one -- строка для серии паспорта
-		Check (passport_serija REGEXP '^[0-9]+$'), -- проверка для строки с серией паспорта
-	passport_number	Varchar(6) not null constraint ch_passport_number_one --- строка для номера паспорта
-		Check (passport_number REGEXP '^[0-9]+$') -- маска
+	passport_serija	Varchar(4) not null, -- проверка для строки с серией паспорта
+	passport_number	Varchar(6) not null, -- маска
+
+	constraint ch_last_name_one
+        check (last_name REGEXP '^[a-zA-Z]+$'),
+	 constraint ch_first_name_one
+        check (first_name REGEXP '^[a-zA-Z]+$'),
+	 constraint ch_otchestwo_one
+        check (otchestwo REGEXP '^[a-zA-Z]+$'),
+	 constraint ch_passport_serija_one -- строка для серии паспорта
+		Check (passport_serija REGEXP '^[0-9]+$'),
+	 constraint ch_passport_number_one --- строка для номера паспорта
+		Check (passport_number REGEXP '^[0-9]+$')
+	
 );
 
 create table sdelka -- таблица для сделок

@@ -42,17 +42,17 @@ begin
 end;
 
 DELIMITER //
-create procedure type_uslug_insert (p_type_uslug_name varchar(60),
-    p_type_uslug_opisanie VARCHAR(60))
+create procedure otdel_insert (p_otdel_name	Varchar(60),
+    p_otdel_opisanie VARCHAR(200))
 begin
 	declare have_record int;
-    select count(*) into have_record from type_uslug
-	where type_uslug_name = p_type_uslug_name
-		and type_uslug_opisanie = p_type_uslug_opisanie;
+    select count(*) into have_record from otdel
+	where otdel_name = p_otdel_name
+		and otdel_opisanie = p_otdel_opisanie;
 	if have_record > 0 then
 		select 'There is already book library with the specified data.' as "Error";
     else
-		insert into type_uslug (type_uslug_name, type_uslug_opisanie)
-		values (p_type_uslug_name, p_type_uslug_opisanie);
+		insert into otdel (otdel_name, otdel_opisanie)
+		values (p_otdel_name, p_otdel_opisanie);
 	end if;
 end;
