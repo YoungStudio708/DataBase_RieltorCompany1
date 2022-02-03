@@ -1,12 +1,12 @@
-CREATE OR REPLACE VIEW workingbook_view
+CREATE OR REPLACE VIEW workingbook_view -- создаем представление
 AS
-SELECT 
+SELECT --выбор
     CONCAT(last_name, ' ', SUBSTRING(first_name, 1, 1), '.', SUBSTRING(otchestwo, 1, 1), '. ',
-            'Passport: ', passport_serija, '-', passport_number, '.') AS "Passport data",
+            'Passport: ', passport_serija, '-', passport_number, '.') AS "Passport data", -- построчный ввод переменных
     CONCAT('Phone number: ', telephone_number, 
             'Life address: ', life_address, '.') AS "Contact information"
-    FROM sotrudnik_position
-    INNER JOIN  sotrudnik ON sotrudnik_id = id_sotrudnik
+    FROM sotrudnik_position -- из этой таблицы
+    INNER JOIN  sotrudnik ON sotrudnik_id = id_sotrudnik -- подключение к ключам
     INNER JOIN  position_s ON position_id = id_position;
 
 
