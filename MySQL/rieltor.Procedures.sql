@@ -120,3 +120,82 @@ begin
 		p_passport_serija, p_passport_number);
 	end if;
 end;
+
+DELIMITER //
+create procedure sdelka_insert (p_nazvanie VARCHAR(60), p_data_sdelki DATE ,
+    p_opisanie_sdilki VARCHAR (100), p_summa_sdelki DECIMAL (38,2), p_nedvijimost_id INT,
+    p_sotrudnic_id INT , p_client_id INT, p_type_sdelki_id INT)
+begin
+	declare have_record int;
+    select count(*) into have_record from sdelka
+	where nazvanie = p_nazvanie AND
+        data_sdelki = p_data_sdelki AND
+        opisanie_sdilki = p_opisanie_sdilki AND
+        summa_sdelki =p_summa_sdelki AND
+        nedvijimost_id = p_nedvijimost_id AND
+        sotrudnic_id = p_sotrudnic_id AND
+        client_id = p_client_id AND 
+        type_sdelki_id = p_type_sdelki_id;
+	if have_record > 0 then
+		select 'There is already book library with the specified data.' as "Error";
+    else
+		insert into sdelka (nazvanie, data_sdelki, opisanie_sdilki,
+		summa_sdelki, nedvijimost_id, sotrudnic_id,
+		client_id, type_sdelki_id)
+		values (p_nazvanie, p_data_sdelki, p_opisanie_sdilki,
+		p_summa_sdelki, p_nedvijimost_id, p_sotrudnic_id,
+		p_client_id, p_type_sdelki_id);
+	end if;
+end;
+
+DELIMITER //
+create procedure position_s_insert (p_position_name VARCHAR(30), p_salary DECIMAL (38,2),
+    p_otdel_id INT, p_type_uslug_id INT)
+begin
+	declare have_record int;
+    select count(*) into have_record from position_s
+	where position_name = p_position_name AND
+        salary = p_salary AND
+        otdel_id = p_otdel_id AND
+        type_uslug_id = p_type_uslug_id ;
+	if have_record > 0 then
+		select 'There is already book library with the specified data.' as "Error";
+    else
+		insert into position_s (position_name, salary,
+		otdel_id, type_uslug_id)
+		values (p_position_name, p_salary,
+		p_otdel_id, p_type_uslug_id);
+	end if;
+end;
+
+DELIMITER //
+create procedure sotrudnik_position_insert (p_sotrudnik_id INT, 
+p_position_id INT)
+begin
+	declare have_record int;
+    select count(*) into have_record from sotrudnik_position
+	where sotrudnik_id = p_sotrudnik_id AND
+        position_id = p_position_id ;
+	if have_record > 0 then
+		select 'There is already book library with the specified data.' as "Error";
+    else
+		insert into sotrudnik_position (sotrudnik_id, position_id)
+		values (p_sotrudnik_id, p_position_id);
+	end if;
+end;
+
+DELIMITER //
+create procedure sotrudnik_otdel_insert (p_sotrudnik_id INT, 
+p_otdel_id INT)
+begin
+	declare have_record int;
+    select count(*) into have_record from sotrudnik_otdel
+	where sotrudnik_id = p_sotrudnik_id AND
+        otdel_id = p_otdel_id ;
+	if have_record > 0 then
+		select 'There is already book library with the specified data.' as "Error";
+    else
+		insert into sotrudnik_otdel (sotrudnik_id, otdel_id)
+		values (p_sotrudnik_id, p_otdel_id);
+	end if;
+end;
