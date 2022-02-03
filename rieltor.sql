@@ -43,9 +43,9 @@ create table client
     constraint ch_last_name
         check (last_name REGEXP '^[а-яА-Яa-zA-Z]+$'),
     constraint ch_first_name
-        check (first_name REGEXP '^[a-zA-Z]+$'),
+        check (first_name REGEXP '^[а-яА-Яa-zA-Z]+$'),
     constraint ch_otchestwo
-        check (otchestwo REGEXP '^[a-zA-Z]+$'),
+        check (otchestwo REGEXP '^[а-яА-Яa-zA-Z]+$'),
 	constraint ch_passport_serija -- строка для серии паспорта
 		check (passport_serija REGEXP '^[0-9]+$'),
 	constraint ch_passport_number --- строка для номера паспорта
@@ -70,23 +70,24 @@ create table sotrudnik -- таблица для сотрудников
 	last_name varchar(30) not null, -- строка для фамилии
 	first_name varchar(30) not null, -- строка для имени
 	otchestwo varchar(30) null default('-'), -- строка для отчества, заполнять не обязательно
-	telephone_number varchar(18) not null unique -- уникальная строка для уникального номера телефона
-		check (telephone_number like '+7(___)-___-__-__'), -- симуляция или маска
+	telephone_number varchar(18) not null unique, -- уникальная строка для уникального номера телефона -- симуляция или маска
 	life_address varchar(200) not null, -- строка для адреса проживания сотрудника
 	birthday date not null, -- строка для указания дня рождения
 	passport_serija	Varchar(4) not null, -- проверка для строки с серией паспорта
 	passport_number	Varchar(6) not null, -- маска
 
 	constraint ch_last_name_one
-        check (last_name REGEXP '^[a-zA-Z]+$'),
+        check (last_name REGEXP '^[а-яА-Яa-zA-Z]+$'),
 	 constraint ch_first_name_one
-        check (first_name REGEXP '^[a-zA-Z]+$'),
+        check (first_name REGEXP '^[а-яА-Яa-zA-Z]+$'),
 	 constraint ch_otchestwo_one
-        check (otchestwo REGEXP '^[a-zA-Z]+$'),
+        check (otchestwo REGEXP '^[а-яА-Яa-zA-Z]+$'),
 	 constraint ch_passport_serija_one -- строка для серии паспорта
 		Check (passport_serija REGEXP '^[0-9]+$'),
 	 constraint ch_passport_number_one --- строка для номера паспорта
-		Check (passport_number REGEXP '^[0-9]+$')
+		Check (passport_number REGEXP '^[0-9]+$'),
+	constraint ch_telephone_number_one
+			check (telephone_number like '+7(___)-___-__-__')
 	
 );
 
@@ -118,7 +119,7 @@ create table position_s -- таблица для должностей
 	FOREIGN KEY (otdel_id) REFERENCES  otdel (id_otdel), -- строка для внешнего ключа на таблицу с отделами
 	FOREIGN KEY (type_uslug_id) REFERENCES  type_uslug (id_type_uslug),
     constraint ch_position_name
-        check (position_name REGEXP '^[a-zA-Z]+$') -- внешний ключ на таблицу с типами услуг
+        check (position_name REGEXP '^[а-яА-Яa-zA-Z]+$') -- внешний ключ на таблицу с типами услуг
 );
 
 create table sotrudnik_position -- таблица для общей таблицы сотрудника и должности
