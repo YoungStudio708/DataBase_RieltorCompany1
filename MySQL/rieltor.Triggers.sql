@@ -1,6 +1,6 @@
-create table sotrudnik_history
+create table sotrudnik_history -- новая табличка для триггеров
 (
-id_sotrudnik_history INT not null auto_increment primary key,
+id_sotrudnik_history INT not null auto_increment primary key, -- первичный ключ
 status_rec varchar(20) not null,
 sotrudnik_info varchar(20) not null,
 post_info varchar(20) not null,
